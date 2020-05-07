@@ -8,7 +8,6 @@ class DatasetLoader:
         self.frame_limit = frame_limit
 
 
-
     def get_matrix(self,keep_color=False):
         cap = cv2.VideoCapture(self.path)
         success, matrix = cap.read()
