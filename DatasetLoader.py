@@ -3,20 +3,24 @@ import numpy as np
 
 
 class DatasetLoader:
-    def __init__(self, path, frame_limit=10000):
+    def __init__(self, path, frame_limit=20):
         self.path = path
         self.frame_limit = frame_limit
+        self.image_resolution = None
 
-    def get_matrix(self, keep_color=False):
+    def get_matrix(self, keep_color=True):
         print('Reading data...')
         cap = cv2.VideoCapture(self.path)
         success, matrix = cap.read()
+        self.image_resolution = tuple(matrix.shape)
         if not keep_color:
             matrix = cv2.cvtColor(matrix, cv2.COLOR_BGR2GRAY)
         matrix = np.ravel(matrix)
         frame_no = 1
         while success and frame_no < self.frame_limit:
             success, img = cap.read()
+            if not success:
+                break
             if not keep_color:
                 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             img = np.ravel(img)
