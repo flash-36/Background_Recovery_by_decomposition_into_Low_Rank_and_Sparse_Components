@@ -3,7 +3,7 @@ import numpy as np
 
 
 class DatasetLoader:
-    def __init__(self, path, frame_limit=20):
+    def __init__(self, path, frame_limit=1000):
         self.path = path
         self.frame_limit = frame_limit
         self.image_resolution = None
